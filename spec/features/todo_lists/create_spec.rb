@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "creating todo_lists" do
   def create_todo_list(options={})
-    options[:title] ||= "My todo list"
+    options[:title] ||= "My Todo list"
     options[:description] ||= "This is my todo list"
     
     visit '/todo_lists'
