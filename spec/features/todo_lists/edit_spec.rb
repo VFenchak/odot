@@ -26,4 +26,34 @@ describe "editing todo list" do
   	expect(todo_list.title).to eq("New title")
   	expect(todo_list.description).to eq("New description")
   end
+
+  it "updates a todo list successfully if title is not empty" do
+    update_todo_list todo_list: todo_list, title: ''
+    todo_list.reload
+    expect(page).to have_content 'error'
+    expect(todo_list.description).to_not eq("New description")
+  end
+
+  it "title length must be > 3 chars" do
+    update_todo_list todo_list: todo_list, title: 'Hi'
+    todo_list.reload
+    expect(page).to have_content 'error'
+    expect(page).to_not have_content 'Hi'
+    expect(todo_list.title).to_not eq("Hi")
+  end
+
+  it "updates a todo list successfully if description is not empty" do
+    update_todo_list todo_list: todo_list, description: ''
+    todo_list.reload
+    expect(page).to have_content 'error'
+    expect(todo_list.description).to_not eq('')
+  end
+
+  it "description length must be > 5 chars" do
+    update_todo_list todo_list: todo_list, description: 'Test'
+    todo_list.reload
+    expect(page).to have_content 'error'
+    expect(todo_list.description).to_not eq('Test')
+  end
+
 end
