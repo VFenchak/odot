@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe "editing todo list" do
+	let!(:todo_list) { TodoList.create title: "Groceries", description: "Grocery list." }
+	
   def update_todo_list(options={})
     options[:title] ||= "New title"
     options[:description] ||= "New description"
@@ -16,7 +18,6 @@ describe "editing todo list" do
   end
   
   it "updates a todo list successfully with correct information" do
-  	todo_list = TodoList.create title: "Groceries", description: "Grocery list."
     update_todo_list todo_list: todo_list
   	
     #recargamos la variable
