@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 describe "creating todo_lists" do
+  #let!(:todo_list) { TodoList.create title: "My Todo list", description: "Some description" }
+
   def create_todo_list(options={})
     options[:title] ||= "My Todo list"
-    options[:description] ||= "This is my todo list"
+    options[:description] ||= "Some description"
     
     visit '/todo_lists'
     click_link 'New Todo list'
@@ -26,7 +28,7 @@ describe "creating todo_lists" do
     visit '/todo_lists'
     expect(page).to_not have_content 'Some description'
   end
-  
+
   it "title should be > 3" do
     expect(TodoList.count).to eq(0)
     create_todo_list title: 'Hi'
@@ -34,5 +36,23 @@ describe "creating todo_lists" do
     expect(TodoList.count).to eq(0)
     visit '/todo_lists'
     expect(page).to_not have_content 'Some description'
+  end
+
+  it "show one error if description is empty" do
+    expect(TodoList.count).to eq(0)
+    create_todo_list description: ''
+    expect(page).to have_content 'error'
+    expect(TodoList.count).to eq(0)
+    visit '/todo_lists'
+    expect(page).to_not have_content 'My Todo list'
+  end
+
+  it "description should be > 5" do
+    expect(TodoList.count).to eq(0)
+    create_todo_list description: 'Ops'
+    expect(page).to have_content 'error'
+    expect(TodoList.count).to eq(0)
+    visit '/todo_lists'
+    expect(page).to_not have_content 'My Todo list'
   end
 end
