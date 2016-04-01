@@ -7,8 +7,8 @@ describe "destroying todo list" do
 		visit '/todo_lists'
 		within "#todo_list_#{todo_list.id}" do
   			click_link "Destroy"
-  		end
-  		expect(page).to_not have_content("Groceries")
-  		expect(TodoList.count).to eq(0)
+  	end
+  	expect(page).to_not have_content("Groceries")
+  	expect(TodoList.count).to eq(0)
 	end
 end
