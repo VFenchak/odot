@@ -19,5 +19,7 @@ describe "creating todo items" do
   			expect(page).to have_content 'Test item'
   	end
   end
+  # > 3 chars
+  # que tenga contenido el todo item al crearlo
   
 end
