@@ -4,7 +4,8 @@ class TodoItemsController < ApplicationController
   def index
     
   end
-  
+  #complete_todo_list_todo_item
+  #Agregar la accion e hipervinculo
   def new
    
     @todo_item = @todo_list.todo_items.new
